@@ -61,7 +61,6 @@ class ProfileViewController: UIViewController {
                 self.copyAvatar.transform = .identity
                 self.copyAvatar.center = CGPoint(x: 66 , y: 66 + self.getStatusBarHeight())
                 NSLayoutConstraint.activate(self.setupCopyAvatarConstraint())
-    
             },
             completion: nil
         )
