@@ -53,17 +53,15 @@ class InfoViewController: UIViewController {
         self.view.addSubview(alertButton)
         print("viewDidLoad InfoViewController")
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.view.backgroundColor = .darkGray
+        self.view.backgroundColor = .lightGray
         
         NSLayoutConstraint.activate([
-            self.alertButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            self.alertButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            self.alertButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            self.alertButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             self.alertButton.heightAnchor.constraint(equalToConstant: 100),
             self.alertButton.widthAnchor.constraint(equalToConstant: 200),
         ])
-     
     }
-    
     
     private func setupNavigationItems() {
         
@@ -75,7 +73,7 @@ class InfoViewController: UIViewController {
         navigationItem.titleView = label
         
         if let navigationBar = navigationController?.navigationBar {
-            
+
             label.widthAnchor.constraint(equalTo: navigationBar.widthAnchor, constant: -140).isActive = true
         }
     }

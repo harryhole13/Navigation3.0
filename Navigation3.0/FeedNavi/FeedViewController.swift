@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import StorageService
 
 class FeedViewController: UIViewController {
     
-    var myFirstPost = FirstPost(title: "Kukareku")
+    var myFirstPost =  FirstPost(title: "Kukareku")
     
     lazy private var postButton: UIButton = {
         let button = UIButton()
@@ -28,6 +29,7 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .blue
         self.view.addSubview(postButton)
+        print("feed")
        
         NSLayoutConstraint.activate([
             self.postButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),

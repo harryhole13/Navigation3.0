@@ -111,6 +111,14 @@ class ProfileViewController: UIViewController {
         self.setupViewBlur()
         self.navigationController?.isNavigationBarHidden = false
         self.setupGesture()
+        
+        
+        #if DEBUG
+        self.view.backgroundColor = .blue
+        #else
+        self.view.backgroundColor = .red
+        #endif
+        
     }
     
     private func setupTableVIew() -> [NSLayoutConstraint] {
