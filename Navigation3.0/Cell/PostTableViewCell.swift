@@ -7,6 +7,7 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 
 class PostTableViewCell: UITableViewCell {
 
@@ -30,7 +31,9 @@ class PostTableViewCell: UITableViewCell {
     }()
     
     private lazy var imageCell:UIImageView = {
+
         let image = UIImageView()
+
         image.contentMode = .scaleAspectFit
         image.backgroundColor = .black
         image.frame(forAlignmentRect: CGRect(x: 0, y: 0, width: 70, height: 70))
@@ -114,7 +117,13 @@ class PostTableViewCell: UITableViewCell {
     
     func setupWithData(with post: Post) {
         authorCell.text = post.author
-        imageCell.image = UIImage(named: post.image)
+        
+        if let image = UIImage(named: post.image) {
+            ImageProcessor().processImage(sourceImage: image, filter: .colorInvert) { imageZ in
+                imageCell.image = imageZ
+            }
+        }
+
         descriptionCell.text = post.description
     }
 

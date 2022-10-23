@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ProfileHeaderView: UITableViewHeaderFooterView {
     
@@ -85,7 +86,17 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        self.setupView()
+        
+        self.tintColor = .yellow
+        self.addSubview(avatarImageView)
+        self.addSubview(stackNameWithStatus)
+        self.addSubview(buttonStatus)
+        self.addSubview(setStatus)
+        self.stackNameWithStatus.addArrangedSubview(titleName)
+        self.stackNameWithStatus.addArrangedSubview(titleStatus)
+        
+        self.setupSnapKitView()
+//        self.setupView()
     }
     
     required init?(coder: NSCoder) {
@@ -125,16 +136,42 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         }
     }
     
-    private func setupView(){
-        self.tintColor = .yellow
-        self.addSubview(avatarImageView)
-        self.addSubview(stackNameWithStatus)
-        self.addSubview(buttonStatus)
-        self.addSubview(setStatus)
-        self.stackNameWithStatus.addArrangedSubview(titleName)
-        self.stackNameWithStatus.addArrangedSubview(titleStatus)
+    private func setupSnapKitView(){
         
-
+        self.avatarImageView.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(16)
+            make.leading.equalTo(self.safeAreaLayoutGuide.snp.leading).offset(16)
+            make.width.equalTo(CGFloat(rectangle))
+            make.height.equalTo(CGFloat(rectangle))
+        }
+        
+        self.stackNameWithStatus.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(27)
+            make.trailing.equalTo(self.snp.trailing).offset(-16)
+            make.leading.equalTo(self.avatarImageView.snp.trailing).offset(16)
+            make.bottom.equalTo(self.setStatus.snp.top).offset(-16)
+           
+        }
+        
+        self.setStatus.snp.makeConstraints { make in
+            make.top.equalTo(self.stackNameWithStatus.snp.bottom).offset(16)
+            make.trailing.equalTo(self.snp.trailing).offset(-16)
+            make.leading.equalTo(self.stackNameWithStatus.snp.leading)
+            make.height.equalTo(40)
+        }
+        
+        self.buttonStatus.snp.makeConstraints { make in
+            make.top.equalTo(self.setStatus.snp.bottom).offset(16)
+            make.trailing.equalTo(self.snp.trailing).offset(-16)
+            make.leading.equalTo(self.snp.leading).offset(16)
+            make.height.equalTo(50)
+            make.bottom.equalTo(self.snp.bottom).offset(-16)
+        }
+        
+    }
+    
+    private func setupView(){
+       
         NSLayoutConstraint.activate([
             self.avatarImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
             self.avatarImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),

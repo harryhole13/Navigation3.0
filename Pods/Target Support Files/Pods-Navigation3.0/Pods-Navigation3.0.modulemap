@@ -1,0 +1,6 @@
+framework module Pods_Navigation3_0 {
+  umbrella header "Pods-Navigation3.0-umbrella.h"
+
+  export *
+  module * { export * }
+}
