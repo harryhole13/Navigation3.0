@@ -26,7 +26,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return button
     }()
     
-    private lazy var titleName: UILabel = {
+    lazy var titleName: UILabel = {
         let title = UILabel()
         title.text = "Homelander"
         title.textColor = UIColor.black
@@ -60,9 +60,9 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return setStatus
     }()
 
-   private var statusText = "Inhuman fucking monster" //первичный статус
+   lazy var statusText = "Inhuman fucking monster" //первичный статус
             
-    private lazy var titleStatus: UILabel = {
+    lazy var titleStatus: UILabel = {
         var title = UILabel()
         title.text = statusText
         title.textColor = UIColor.gray

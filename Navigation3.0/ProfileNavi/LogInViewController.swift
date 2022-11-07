@@ -7,6 +7,53 @@
 
 import UIKit
 
+protocol UserService {
+    func pushUser(login: String) -> User?
+}
+
+class User {
+    
+    var login = String()
+    var fullName = String()
+    var avatar = UIImage()
+    var status = String()
+    
+    init(login: String, fullName: String, avatar: UIImage, status: String) {
+        self.login = login
+        self.fullName = fullName
+        self.avatar = avatar
+        self.status = status
+    }
+    
+}
+
+class TestUserService: UserService {
+    
+    static let user = TestUserService()
+    func pushUser(login: String) -> User? {
+        testUser
+    }
+    
+    private var testUser = User(login: "Test", fullName: "TestName", avatar: UIImage(named: "test")!, status: "debug session")
+}
+
+
+class CurrentUserService: UserService {
+    private init() {}
+    static let shared = CurrentUserService()
+    
+    func pushUser(login: String) -> User? {
+        
+        if currentUser.login == login {
+            return currentUser
+        } else {
+            return nil
+        }
+    }
+    
+    private var currentUser = User(login: "Aleksey", fullName: "Potemin", avatar: UIImage(named: "Brad")!, status: "I am New Homelander")
+}
+
 class LogInViewController: UIViewController {
     
     lazy private var scroll: UIScrollView = {
@@ -14,7 +61,7 @@ class LogInViewController: UIViewController {
         scroll.translatesAutoresizingMaskIntoConstraints = false
         scroll.backgroundColor = .white
         scroll.contentSize = CGSize(width: self.view.frame.size.width, height: 906)
-            return scroll
+        return scroll
     }()
     
     private lazy  var logoImage: UIImageView = {
@@ -39,24 +86,38 @@ class LogInViewController: UIViewController {
     }()
     
     @objc func logIn() {
-        navigationController?.pushViewController(ProfileViewController(), animated: true)
+        
+        
+       
+        #if DEBUG
+        if let user = TestUserService.user.pushUser(login: enterEmail.text!) {
+            navigationController?.pushViewController(ProfileViewController(currentUser: user), animated: true)
+        }
+        #else
+        if let user = CurrentUserService.shared.pushUser(login: enterEmail.text ?? "") {
+            navigationController?.pushViewController(ProfileViewController(currentUser: user), animated: true)
+        }
+        #endif
+        
+        
+        
         switch logInButton.state {
         case .normal:
-                print("Normal")
+            print("Normal")
             logInButton.alpha = 1
         case .highlighted:
-                print("highlighted")
+            print("highlighted")
             logInButton.alpha = 0.8
         case .selected:
-                print("selected")
+            print("selected")
             logInButton.alpha = 0.8
         case .disabled:
-                print("disabled")
+            print("disabled")
             logInButton.alpha = 0.8
         default:
-                print("default")
+            print("default")
             logInButton.alpha = 1
-            }
+        }
     }
     
     private lazy var enterEmail: UITextField = {
@@ -102,9 +163,9 @@ class LogInViewController: UIViewController {
         stack.clipsToBounds = true
         return stack
     }()
-   
+    
     private var login: String?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(scroll)
@@ -137,7 +198,7 @@ class LogInViewController: UIViewController {
             self.stackView.heightAnchor.constraint(equalToConstant: 100),
             self.stackView.topAnchor.constraint(equalTo: self.logoImage.bottomAnchor, constant: 120),
         ])
-
+        
     }
     
     private func setupGestures() {
@@ -177,7 +238,7 @@ class LogInViewController: UIViewController {
         self.view.endEditing(true)
         self.scroll.setContentOffset(.zero, animated: true)
     }
-
+    
 }
 
 extension LogInViewController: UITextFieldDelegate {
@@ -203,3 +264,4 @@ extension LogInViewController: UITextFieldDelegate {
         return true
     }
 }
+
