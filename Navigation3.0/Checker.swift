@@ -22,7 +22,11 @@ final class Checker {
     private static let password = "qwerty"
     
     func check(loginSingle: String, passwordSingle: String) -> Bool {
-        return Checker.login == loginSingle && Checker.password == passwordSingle ? true: false
+        if Checker.login == loginSingle && Checker.password == passwordSingle {
+            return true
+        } else {
+                return false
+            }
     }
     
 }

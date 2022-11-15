@@ -26,6 +26,7 @@
 		8790BCF728F8B7C200DEF62F /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8790BCF028F8B7C100DEF62F /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8790BCFC28F8B99200DEF62F /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8701329628BC02CD004A5816 /* PostViewController.swift */; };
 		8790BCFD28F8C8A000DEF62F /* StructModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703CEFF28C231A400F7AD34 /* StructModel.swift */; };
+		87DBD813292437F0000DC96C /* MyLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DBD812292437F0000DC96C /* MyLoginFactory.swift */; };
 		87EE4C4D2920347D001DED41 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE4C4C2920347D001DED41 /* User.swift */; };
 		87EE4C4F29203DC1001DED41 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE4C4E29203DC1001DED41 /* Checker.swift */; };
 		87EE4C5129204302001DED41 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE4C5029204302001DED41 /* LoginInspector.swift */; };
@@ -76,6 +77,7 @@
 		8789CE4B28B95BE800CDB3E0 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		8790BCF028F8B7C100DEF62F /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8790BCF228F8B7C200DEF62F /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
+		87DBD812292437F0000DC96C /* MyLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLoginFactory.swift; sourceTree = "<group>"; };
 		87EE4C4C2920347D001DED41 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		87EE4C4E29203DC1001DED41 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		87EE4C5029204302001DED41 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				87EE4C4C2920347D001DED41 /* User.swift */,
 				87EE4C4E29203DC1001DED41 /* Checker.swift */,
 				87EE4C5029204302001DED41 /* LoginInspector.swift */,
+				87DBD812292437F0000DC96C /* MyLoginFactory.swift */,
 				8703CF0528C7CA6100F7AD34 /* Cell */,
 				8703CF0428C7CA3C00F7AD34 /* ProfileNavi */,
 				8703CF0328C7CA0E00F7AD34 /* FeedNavi */,
@@ -298,6 +301,7 @@
 				8789CE4C28B95BE800CDB3E0 /* ProfileHeaderView.swift in Sources */,
 				87EE4C4D2920347D001DED41 /* User.swift in Sources */,
 				8703CEFE28BEA44400F7AD34 /* LogInViewController.swift in Sources */,
+				87DBD813292437F0000DC96C /* MyLoginFactory.swift in Sources */,
 				8789CE3828B8EB0B00CDB3E0 /* AppDelegate.swift in Sources */,
 				8701329528BC0235004A5816 /* ProfileViewController.swift in Sources */,
 				8701329328BC01B2004A5816 /* FeedViewController.swift in Sources */,

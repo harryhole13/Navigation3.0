@@ -9,13 +9,8 @@ import Foundation
 
 struct LoginInspector: LogInViewControllerDelegate {
     
-
-    
     func check(login: String, pswd: String) -> Bool {
         Checker.shared.check(loginSingle: login, passwordSingle: pswd)
     }
-    
-    
-    
 }
 

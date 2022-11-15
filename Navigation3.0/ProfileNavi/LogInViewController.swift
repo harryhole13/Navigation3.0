@@ -72,8 +72,37 @@ class LogInViewController: UIViewController {
         }
         
         #else
+        
+        let login = enterEmail.text!
+        let pswd = enterPassword.text!
        
-        self.loginDelegate?.check(login: enterEmail.text, pswd: enterPassword.text)
+        guard self.loginDelegate?.check(login: login, pswd: pswd) == true else {
+
+            print(login, pswd)
+            let alertInfo = UIAlertController(
+                title: "404",
+                message: "Not correct login or pswrd",
+                preferredStyle: .actionSheet
+            )
+            
+//            let okAction = UIAlertAction(
+//                title: "Sure",
+//                style: .default) {
+//                    _ in
+//                print ("the quest is over")
+//                    }
+            
+            let cancelAlert = UIAlertAction(
+                title: "Cancel",
+                style: .cancel,
+                handler: nil)
+            
+            
+            alertInfo.addAction(cancelAlert)
+            
+           return self.present(alertInfo, animated: true, completion: nil)
+        
+        }
         
         if let user = CurrentUserService.shared.pushUser(login: enterEmail.text ?? "") {
             navigationController?.pushViewController(ProfileViewController(currentUser: user), animated: true)
