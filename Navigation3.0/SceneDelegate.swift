@@ -18,7 +18,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let tabbar = UITabBarController()
         let feed = UINavigationController(rootViewController: FeedViewController())
-        let profile = UINavigationController(rootViewController: LogInViewController())
+        let VC = LogInViewController()
+        let inspector = LoginInspector()
+        VC.loginDelegate = inspector
+
+        
+        let profile = UINavigationController(rootViewController: VC)
         
         
         
@@ -32,11 +37,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = tabbar
         window?.makeKeyAndVisible()
         }
-        
-        
-    
-    
 
-    
 }
 

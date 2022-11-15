@@ -7,54 +7,27 @@
 
 import UIKit
 
-protocol UserService {
-    func pushUser(login: String) -> User?
-}
-
-class User {
+protocol LogInViewControllerDelegate {
     
-    var login = String()
-    var fullName = String()
-    var avatar = UIImage()
-    var status = String()
+    func check(login: String, pswd: String) -> Bool 
     
-    init(login: String, fullName: String, avatar: UIImage, status: String) {
-        self.login = login
-        self.fullName = fullName
-        self.avatar = avatar
-        self.status = status
-    }
-    
-}
-
-class TestUserService: UserService {
-    
-    static let user = TestUserService()
-    func pushUser(login: String) -> User? {
-        testUser
-    }
-    
-    private var testUser = User(login: "Test", fullName: "TestName", avatar: UIImage(named: "test")!, status: "debug session")
-}
-
-
-class CurrentUserService: UserService {
-    private init() {}
-    static let shared = CurrentUserService()
-    
-    func pushUser(login: String) -> User? {
-        
-        if currentUser.login == login {
-            return currentUser
-        } else {
-            return nil
-        }
-    }
-    
-    private var currentUser = User(login: "Aleksey", fullName: "Potemin", avatar: UIImage(named: "Brad")!, status: "I am New Homelander")
 }
 
 class LogInViewController: UIViewController {
+    
+    var loginDelegate: LogInViewControllerDelegate?
+    
+//    init(with loginDelegate: LogInViewControllerDelegate ) {
+//        super.init(nibName: nil, bundle: nil)
+//        self.loginDelegate = loginDelegate
+//
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
+    
     
     lazy private var scroll: UIScrollView = {
         let scroll = UIScrollView()
@@ -85,15 +58,23 @@ class LogInViewController: UIViewController {
         return button
     }()
     
+    
+    
     @objc func logIn() {
         
         
        
         #if DEBUG
+
+        
         if let user = TestUserService.user.pushUser(login: enterEmail.text!) {
             navigationController?.pushViewController(ProfileViewController(currentUser: user), animated: true)
         }
+        
         #else
+       
+        self.loginDelegate?.check(login: enterEmail.text, pswd: enterPassword.text)
+        
         if let user = CurrentUserService.shared.pushUser(login: enterEmail.text ?? "") {
             navigationController?.pushViewController(ProfileViewController(currentUser: user), animated: true)
         }
@@ -126,6 +107,7 @@ class LogInViewController: UIViewController {
         email.leftView = .init(frame: CGRect(x: 0, y: 0, width: 16, height: 10))
         email.leftViewMode = .always
         email.textColor = .black
+        email.text = ""
         email.tag = 0
         email.font = .systemFont(ofSize: 16)
         email.layer.borderColor = UIColor.lightGray.cgColor
@@ -142,6 +124,7 @@ class LogInViewController: UIViewController {
         password.leftView = .init(frame: CGRect(x: 0, y: 0, width: 16, height: 10))
         password.leftViewMode = .always
         password.textColor = .black
+        password.text = ""
         password.tag = 0
         password.font = .systemFont(ofSize: 16)
         password.layer.borderColor = UIColor.lightGray.cgColor
