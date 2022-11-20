@@ -30,11 +30,6 @@ public struct Post {
     }
 }
 
-public struct ModelCollection {
-    public let image: String
-    public init(image: String) {
-        self.image = image
-    }
-}
+
 
 

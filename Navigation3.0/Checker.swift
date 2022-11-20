@@ -17,16 +17,16 @@ final class Checker {
         
     }
     
-    private static let login = "Aleksey2022"
+    private static let login = "a"
     
-    private static let password = "qwerty"
+    private static let password = "2"
     
     func check(loginSingle: String, passwordSingle: String) -> Bool {
         if Checker.login == loginSingle && Checker.password == passwordSingle {
             return true
         } else {
-                return false
-            }
+            return false
+        }
     }
     
 }

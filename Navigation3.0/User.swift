@@ -47,6 +47,6 @@ class CurrentUserService: UserService {
         return currentUser.login == login ? currentUser: nil //тернарный
     }
     
-    private var currentUser = User(login: "Aleksey2022", fullName: "Potemin", avatar: UIImage(named: "Brad")!, status: "I am New Homelander")
+    private var currentUser = User(login: "a", fullName: "Potemin", avatar: UIImage(named: "Brad")!, status: "I am New Homelander")
 }
 

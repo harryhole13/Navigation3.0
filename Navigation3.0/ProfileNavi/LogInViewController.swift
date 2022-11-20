@@ -17,18 +17,6 @@ class LogInViewController: UIViewController {
     
     var loginDelegate: LogInViewControllerDelegate?
     
-//    init(with loginDelegate: LogInViewControllerDelegate ) {
-//        super.init(nibName: nil, bundle: nil)
-//        self.loginDelegate = loginDelegate
-//
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    
-    
-    
     lazy private var scroll: UIScrollView = {
         let scroll = UIScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
@@ -84,13 +72,6 @@ class LogInViewController: UIViewController {
                 message: "Not correct login or pswrd",
                 preferredStyle: .actionSheet
             )
-            
-//            let okAction = UIAlertAction(
-//                title: "Sure",
-//                style: .default) {
-//                    _ in
-//                print ("the quest is over")
-//                    }
             
             let cancelAlert = UIAlertAction(
                 title: "Cancel",

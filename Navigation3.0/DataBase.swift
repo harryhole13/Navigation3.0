@@ -75,3 +75,9 @@ let deep = Post(
 
 let dataBase:[Post] = [billy, hughie, star, soldier, deep]
 
+public struct ModelCollection {
+    public let image: String
+    public init(image: String) {
+        self.image = image
+    }
+}

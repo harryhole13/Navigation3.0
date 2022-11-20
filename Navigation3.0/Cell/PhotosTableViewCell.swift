@@ -43,4 +43,9 @@ class PhotosTableViewCell: UICollectionViewCell {
     func setup(with photo: ModelCollection) {
         self.photoView.image = UIImage(named: photo.image)
         }
+    
+    func setupImage(with photoImage: UIImageView) {
+        self.photoView.image = photoImage.image
+        }
+    
 }
