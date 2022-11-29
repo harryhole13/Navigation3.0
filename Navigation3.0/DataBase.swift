@@ -7,7 +7,8 @@
 
 import Foundation
 
-import Foundation
+import StorageService
+
 let collectionPhotos:[ModelCollection] = [collection1, collection2, collection3, collection4, collection5, collection6, collection7, collection8, collection9, collection10, collection11, collection12, collection13, collection14, collection15, collection16, collection17, collection18, collection19, collection20]
 
 let collection1 = ModelCollection(image: "collection-1")
@@ -74,3 +75,9 @@ let deep = Post(
 
 let dataBase:[Post] = [billy, hughie, star, soldier, deep]
 
+public struct ModelCollection {
+    public let image: String
+    public init(image: String) {
+        self.image = image
+    }
+}

@@ -12,7 +12,7 @@ class PostViewController: UIViewController {
     private var titlePost: UILabel = {
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
-        title.text = "Post Post Post"
+        title.text = "Post text"
         title.backgroundColor = .white
         title.textColor = .black
         title.textAlignment = .center
@@ -24,8 +24,8 @@ class PostViewController: UIViewController {
         self.view.backgroundColor = .orange
         self.view.addSubview(titlePost)
         lazy var superNavi = FeedViewController()
+        print("postviewcontroller")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(self.didTapButton))
-        titlePost.text = superNavi.myFirstPost.title
        
         NSLayoutConstraint.activate([
             self.titlePost.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),

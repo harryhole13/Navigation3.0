@@ -6,12 +6,17 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
     enum Constant {
         static let numberOfItems:CGFloat = 3
     }
+    
+    private lazy var randomizerImage: [UIImage] = []
+    
+    let facad = ImagePublisherFacade()
     
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -33,7 +38,10 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .green
         self.title = "Photo Gallery"
+        print(#function)
         self.view.addSubview(collectionPhoto)
+        self.facad.subscribe(self)
+        self.facad.addImagesWithTimer(time: 3, repeat: 10)
         
         NSLayoutConstraint.activate([
             self.collectionPhoto.topAnchor.constraint(equalTo: self.view.topAnchor),
@@ -43,24 +51,38 @@ class PhotosViewController: UIViewController {
         ])
         self.collectionPhoto.reloadData()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        print(#function)
+        self.facad.removeSubscription(for: self)
+    }
+
 }
 
-extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, ImageLibrarySubscriber {
+    
+    func receive(images: [UIImage]) {
+        randomizerImage = images
+        collectionPhoto.reloadData()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        randomizerImage.count - 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Myfeed", for: indexPath) as? PhotosTableViewCell else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DefaultCollectionCell", for: indexPath)
+            return cell
+        }
+        
+        let viewImage = randomizerImage[indexPath.row]
 
-func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    collectionPhotos.count
-}
-
-func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Myfeed", for: indexPath) as? PhotosTableViewCell else {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DefaultCollectionCell", for: indexPath)
+        cell.setupImage(with: UIImageView(image: viewImage))
+        
         return cell
     }
-    let viewModel = collectionPhotos[indexPath.row]
-    cell.setup(with: viewModel)
-
-    return cell
-}
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         

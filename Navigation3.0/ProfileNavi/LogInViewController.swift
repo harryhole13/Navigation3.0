@@ -7,14 +7,22 @@
 
 import UIKit
 
+protocol LogInViewControllerDelegate {
+    
+    func check(login: String, pswd: String) -> Bool 
+    
+}
+
 class LogInViewController: UIViewController {
+    
+    var loginDelegate: LogInViewControllerDelegate?
     
     lazy private var scroll: UIScrollView = {
         let scroll = UIScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
         scroll.backgroundColor = .white
         scroll.contentSize = CGSize(width: self.view.frame.size.width, height: 906)
-            return scroll
+        return scroll
     }()
     
     private lazy  var logoImage: UIImageView = {
@@ -25,38 +33,67 @@ class LogInViewController: UIViewController {
         return logo
     }()
     
-    private lazy var logInButton: UIButton = {
-        let image = UIImage(named: "blue_pixel")
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 10
-        button.setTitle("Log In", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.setBackgroundImage(image, for: .normal)
-        button.clipsToBounds = true
-        button.addTarget(self, action: #selector(logIn), for: .touchUpInside)
-        return button
-    }()
-    
+    private lazy var logInButton = CustomButton(tittle: "Log In", tittleColor: .white, actionTap: logIn)
+
     @objc func logIn() {
-        navigationController?.pushViewController(ProfileViewController(), animated: true)
+       
+        #if DEBUG
+
+        
+        if let user = TestUserService.user.pushUser(login: enterEmail.text!) {
+            navigationController?.pushViewController(ProfileViewController(currentUser: user), animated: true)
+        }
+        
+        #else
+        
+        let login = enterEmail.text!
+        let pswd = enterPassword.text!
+       
+        guard self.loginDelegate?.check(login: login, pswd: pswd) == true else {
+
+            print(login, pswd)
+            let alertInfo = UIAlertController(
+                title: "404",
+                message: "Not correct login or pswrd",
+                preferredStyle: .actionSheet
+            )
+            
+            let cancelAlert = UIAlertAction(
+                title: "Cancel",
+                style: .cancel,
+                handler: nil)
+            
+            
+            alertInfo.addAction(cancelAlert)
+            
+           return self.present(alertInfo, animated: true, completion: nil)
+        
+        }
+        
+        if let user = CurrentUserService.shared.pushUser(login: enterEmail.text ?? "") {
+            navigationController?.pushViewController(ProfileViewController(currentUser: user), animated: true)
+        }
+        #endif
+        
+        
+        
         switch logInButton.state {
         case .normal:
-                print("Normal")
+            print("Normal")
             logInButton.alpha = 1
         case .highlighted:
-                print("highlighted")
+            print("highlighted")
             logInButton.alpha = 0.8
         case .selected:
-                print("selected")
+            print("selected")
             logInButton.alpha = 0.8
         case .disabled:
-                print("disabled")
+            print("disabled")
             logInButton.alpha = 0.8
         default:
-                print("default")
+            print("default")
             logInButton.alpha = 1
-            }
+        }
     }
     
     private lazy var enterEmail: UITextField = {
@@ -65,6 +102,7 @@ class LogInViewController: UIViewController {
         email.leftView = .init(frame: CGRect(x: 0, y: 0, width: 16, height: 10))
         email.leftViewMode = .always
         email.textColor = .black
+        email.text = ""
         email.tag = 0
         email.font = .systemFont(ofSize: 16)
         email.layer.borderColor = UIColor.lightGray.cgColor
@@ -81,6 +119,7 @@ class LogInViewController: UIViewController {
         password.leftView = .init(frame: CGRect(x: 0, y: 0, width: 16, height: 10))
         password.leftViewMode = .always
         password.textColor = .black
+        password.text = ""
         password.tag = 0
         password.font = .systemFont(ofSize: 16)
         password.layer.borderColor = UIColor.lightGray.cgColor
@@ -102,9 +141,9 @@ class LogInViewController: UIViewController {
         stack.clipsToBounds = true
         return stack
     }()
-   
+    
     private var login: String?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(scroll)
@@ -137,7 +176,7 @@ class LogInViewController: UIViewController {
             self.stackView.heightAnchor.constraint(equalToConstant: 100),
             self.stackView.topAnchor.constraint(equalTo: self.logoImage.bottomAnchor, constant: 120),
         ])
-
+        
     }
     
     private func setupGestures() {
@@ -177,7 +216,7 @@ class LogInViewController: UIViewController {
         self.view.endEditing(true)
         self.scroll.setContentOffset(.zero, animated: true)
     }
-
+    
 }
 
 extension LogInViewController: UITextFieldDelegate {
@@ -203,3 +242,4 @@ extension LogInViewController: UITextFieldDelegate {
         return true
     }
 }
+

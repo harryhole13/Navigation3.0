@@ -9,6 +9,17 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    private var yourAcc: User?
+    
+    init(currentUser: User) {
+        super.init(nibName: nil, bundle: nil)
+        self.yourAcc = currentUser
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func getStatusBarHeight() -> CGFloat {
         var statusBarHeight: CGFloat = 0
         let scenes = UIApplication.shared.connectedScenes
@@ -30,7 +41,6 @@ class ProfileViewController: UIViewController {
         tableView.backgroundColor = .lightGray
         return tableView
     }()
-    
     
     lazy private var rectangleCopy = ProfileHeaderView()  // чтобы из одного места брать размер авы
     
@@ -61,7 +71,6 @@ class ProfileViewController: UIViewController {
                 self.copyAvatar.transform = .identity
                 self.copyAvatar.center = CGPoint(x: 66 , y: 66 + self.getStatusBarHeight())
                 NSLayoutConstraint.activate(self.setupCopyAvatarConstraint())
-    
             },
             completion: nil
         )
@@ -112,6 +121,14 @@ class ProfileViewController: UIViewController {
         self.setupViewBlur()
         self.navigationController?.isNavigationBarHidden = false
         self.setupGesture()
+        
+        
+        #if DEBUG
+        self.view.backgroundColor = .blue
+        #else
+        self.view.backgroundColor = .red
+        #endif
+        
     }
     
     private func setupTableVIew() -> [NSLayoutConstraint] {
@@ -204,10 +221,13 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "Header") as? ProfileHeaderView
-                    
             else {
                 return UITableViewHeaderFooterView()
             }
+            header.titleStatus.text = yourAcc?.status
+            header.avatarImageView.image = yourAcc?.avatar
+            copyAvatar.image = yourAcc?.avatar
+            header.titleName.text = yourAcc?.fullName
         
             return header
         }
@@ -218,7 +238,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CollectionFeed", for: indexPath) as? CollectionView else { return UITableViewCell() }
             cell.imageArrowButton.tag = indexPath.row
-            cell.imageArrowButton .addTarget(self, action: #selector(showCollection), for: .touchUpInside)
+            cell.imageArrowButton.addTarget(self, action: #selector(showCollection), for: .touchUpInside)
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "Post Cell", for: indexPath) as? PostTableViewCell else { return UITableViewCell() }
