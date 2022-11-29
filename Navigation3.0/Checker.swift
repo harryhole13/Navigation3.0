@@ -11,10 +11,8 @@ import Foundation
 
 
 final class Checker {
-    
     static let shared = Checker()
     private init() {
-        
     }
     
     private static let login = "a"

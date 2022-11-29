@@ -11,20 +11,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     var rectangle = 100   //размер авы
     
-    private lazy var buttonStatus: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Install status", for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.layer.cornerRadius = 12
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.layer.shadowRadius = 4
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.7
-        button.addTarget(self, action: #selector(pressButton), for: .touchUpInside)
-        button.backgroundColor = UIColor.blue
-        return button
-    }()
+    private lazy var buttonStatus = CustomButton(tittle: "Install status", tittleColor: .white, actionTap: pressButton)
     
     lazy var titleName: UILabel = {
         let title = UILabel()

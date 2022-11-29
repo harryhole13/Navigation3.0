@@ -16,10 +16,7 @@ class PhotosViewController: UIViewController {
     
     private lazy var randomizerImage: [UIImage] = []
     
-    var facad : ImagePublisherFacade = {
-        let publ = ImagePublisherFacade()
-        return publ
-    }()
+    let facad = ImagePublisherFacade()
     
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -60,23 +57,15 @@ class PhotosViewController: UIViewController {
         print(#function)
         self.facad.removeSubscription(for: self)
     }
-    
-    
-    
+
 }
 
 extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, ImageLibrarySubscriber {
     
     func receive(images: [UIImage]) {
-        
-        for image in images {
-            randomizerImage.append(image)
-            collectionPhoto.reloadData()
-            print(randomizerImage.count)
-        }
-
+        randomizerImage = images
+        collectionPhoto.reloadData()
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         randomizerImage.count - 1
@@ -88,12 +77,8 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
             return cell
         }
         
-        
-//        let viewModel = collectionPhotos[indexPath.row]
-        
         let viewImage = randomizerImage[indexPath.row]
-      
-//        cell.setup(with: viewModel)
+
         cell.setupImage(with: UIImageView(image: viewImage))
         
         return cell

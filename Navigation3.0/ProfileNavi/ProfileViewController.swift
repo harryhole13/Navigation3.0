@@ -29,8 +29,6 @@ class ProfileViewController: UIViewController {
         return statusBarHeight
     }
     
-    
-    
     lazy private var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +41,6 @@ class ProfileViewController: UIViewController {
         tableView.backgroundColor = .lightGray
         return tableView
     }()
-    
     
     lazy private var rectangleCopy = ProfileHeaderView()  // чтобы из одного места брать размер авы
     

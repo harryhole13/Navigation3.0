@@ -28,6 +28,8 @@
 		8790BCFD28F8C8A000DEF62F /* StructModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703CEFF28C231A400F7AD34 /* StructModel.swift */; };
 		87DBD813292437F0000DC96C /* MyLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DBD812292437F0000DC96C /* MyLoginFactory.swift */; };
 		87DBD8162928E7EE000DC96C /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 87DBD8152928E7EE000DC96C /* iOSIntPackage */; };
+		87DBD818292FFD4D000DC96C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DBD817292FFD4C000DC96C /* CustomButton.swift */; };
+		87DBD81A2932D33F000DC96C /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DBD8192932D33F000DC96C /* FeedModel.swift */; };
 		87EE4C4D2920347D001DED41 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE4C4C2920347D001DED41 /* User.swift */; };
 		87EE4C4F29203DC1001DED41 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE4C4E29203DC1001DED41 /* Checker.swift */; };
 		87EE4C5129204302001DED41 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE4C5029204302001DED41 /* LoginInspector.swift */; };
@@ -79,6 +81,8 @@
 		8790BCF028F8B7C100DEF62F /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8790BCF228F8B7C200DEF62F /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
 		87DBD812292437F0000DC96C /* MyLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLoginFactory.swift; sourceTree = "<group>"; };
+		87DBD817292FFD4C000DC96C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		87DBD8192932D33F000DC96C /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		87EE4C4C2920347D001DED41 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		87EE4C4E29203DC1001DED41 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		87EE4C5029204302001DED41 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 			children = (
 				87EE4C4C2920347D001DED41 /* User.swift */,
 				87EE4C4E29203DC1001DED41 /* Checker.swift */,
+				87DBD8192932D33F000DC96C /* FeedModel.swift */,
+				87DBD817292FFD4C000DC96C /* CustomButton.swift */,
 				87EE4C5029204302001DED41 /* LoginInspector.swift */,
 				87DBD812292437F0000DC96C /* MyLoginFactory.swift */,
 				8703CF0528C7CA6100F7AD34 /* Cell */,
@@ -301,7 +307,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8703CF0B28CE760700F7AD34 /* CollectionView.swift in Sources */,
+				87DBD81A2932D33F000DC96C /* FeedModel.swift in Sources */,
 				87EE4C4F29203DC1001DED41 /* Checker.swift in Sources */,
+				87DBD818292FFD4D000DC96C /* CustomButton.swift in Sources */,
 				8703CF0928CE74FF00F7AD34 /* PhotosTableViewCell.swift in Sources */,
 				8790BCFC28F8B99200DEF62F /* PostViewController.swift in Sources */,
 				8703CF0228C2327900F7AD34 /* DataBase.swift in Sources */,

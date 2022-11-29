@@ -33,24 +33,9 @@ class LogInViewController: UIViewController {
         return logo
     }()
     
-    private lazy var logInButton: UIButton = {
-        let image = UIImage(named: "blue_pixel")
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 10
-        button.setTitle("Log In", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.setBackgroundImage(image, for: .normal)
-        button.clipsToBounds = true
-        button.addTarget(self, action: #selector(logIn), for: .touchUpInside)
-        return button
-    }()
-    
-    
-    
+    private lazy var logInButton = CustomButton(tittle: "Log In", tittleColor: .white, actionTap: logIn)
+
     @objc func logIn() {
-        
-        
        
         #if DEBUG
 
